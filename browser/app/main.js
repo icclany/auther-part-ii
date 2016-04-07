@@ -10,7 +10,6 @@ app.config(function ($urlRouterProvider, $locationProvider) {
 	});
 });
 
-// This is to prevent user being "logged out" on page refresh
 app.run(function (Auth) {
 	Auth.refreshMe();
 });

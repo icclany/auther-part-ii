@@ -4,11 +4,8 @@ var router = require('express').Router(),
 	session = require('express-session'),
 	passport = require('passport');
 
-// KEYS ----------------------------------------
-var keys = require('../../auther.js');
-// ---------------------------------------------
-
 var User = require('../api/users/user.model');
+var secrets = require('../../secrets');
 
 router.use(function (req, res, next) {
 	var bodyString = '';
@@ -17,25 +14,21 @@ router.use(function (req, res, next) {
 	});
 	req.on('end', function () {
 		bodyString = bodyString || '{}';
-		req.body = eval('(' + bodyString + ')'); 
+		req.body = eval('(' + bodyString + ')');
 		next();
 	});
 });
 
 router.use(session({
-	secret: keys.sessionKey(),
+	secret: secrets.session,
 	resave: false,
 	saveUninitialized: false
 }));
 
-// Put something onto session object
-// Runs once on login
 passport.serializeUser(function (user, done) {
 	done(null, user._id);
 });
 
-// Attach req user
-// Runs every time passport session middleware runs
 passport.deserializeUser(function (id, done) {
 	User.findById(id, done);
 });

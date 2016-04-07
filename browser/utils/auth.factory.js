@@ -37,7 +37,6 @@ app.factory('Auth', function ($http, $rootScope, User) {
 			return $http.delete('/auth/me')
 			.then(removeMe);
 		},
-		// Gets the current user
 		refreshMe: function () {
 			return $http.get('/auth/me')
 			.then(toData)

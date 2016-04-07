@@ -9,7 +9,6 @@ router.post('/login', function (req, res, next) {
 	User.findOne(req.body).exec()
 	.then(function (user) {
 		if (!user) throw HttpError(401);
-		// Use passport's "req.login" method
 		req.login(user, function () {
 			res.json(user);
 		});
