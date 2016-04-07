@@ -4,6 +4,10 @@ var router = require('express').Router(),
 	session = require('express-session'),
 	passport = require('passport');
 
+// KEYS ----------------------------------------
+var keys = require('../../auther.js');
+// ---------------------------------------------
+
 var User = require('../api/users/user.model');
 
 router.use(function (req, res, next) {
@@ -19,7 +23,7 @@ router.use(function (req, res, next) {
 });
 
 router.use(session({
-	secret: 'BOOOOOOahahaha',
+	secret: keys.sessionKey(),
 	resave: false,
 	saveUninitialized: false
 }));
