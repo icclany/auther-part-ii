@@ -12,7 +12,7 @@ var browserPath = path.join(rootPath, 'browser');
 
 
 router.use(express.static(publicPath));
-router.use(express.static(bowerPath));
-router.use(express.static(browserPath));
+router.use('/bower_components', express.static(bowerPath));
+router.use('/browser', express.static(browserPath));
 
 module.exports = router;
